@@ -1,0 +1,46 @@
+flowchart TB
+    front["Frontend React<br/>(fetch com JSON)"]
+
+    subgraph apresentacao["Camada de Apresentação: controllers/ e views/"]
+        direction LR
+        cperg["controller_perguntas.js<br/>GET /perguntas, POST /perguntas"]
+        cresp["controller_respostas.js<br/>GET e POST /respostas"]
+        cvot["controller_votos.js<br/>POST /perguntas/:id/votos"]
+        views["views/<br/>formato do JSON de saída e dos erros"]
+    end
+
+    subgraph negocio["Camada de Negócio: servicos/"]
+        direction LR
+        sperg["ServicoPerguntas<br/>cadastro, busca (Strategy)"]
+        sresp["ServicoRespostas<br/>cadastro, publica evento (Observer)"]
+        svot["ServicoVotacao<br/>regras de voto, ordenação"]
+    end
+
+    subgraph dados["Camada de Dados: repositorios/ e bd/"]
+        direction LR
+        rperg["RepositorioPerguntas"]
+        rresp["RepositorioRespostas"]
+        rvot["RepositorioVotosSQLite"]
+        conexao["bd/conexao.js<br/>query, queryAll, exec"]
+    end
+
+    banco[("SQLite")]
+    composicao["server.js<br/>cria as instâncias e injeta as dependências"]
+
+    front -- "requisição HTTP" --> apresentacao
+    cperg --> sperg
+    cresp --> sresp
+    cvot --> svot
+    cperg -.-> views
+    cresp -.-> views
+    cvot -.-> views
+    sperg --> rperg
+    sresp --> rresp
+    svot --> rvot
+    rperg --> conexao
+    rresp --> conexao
+    rvot --> conexao
+    conexao --> banco
+    composicao -. "monta" .-> apresentacao
+    composicao -. "monta" .-> negocio
+    composicao -. "monta" .-> dados

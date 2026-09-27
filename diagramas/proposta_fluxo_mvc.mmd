@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant F as Frontend React
+    participant E as Express
+    participant C as ControllerPerguntas
+    participant SP as ServicoPerguntas
+    participant BT as BuscaPorTexto
+    participant RP as RepositorioPerguntas
+    participant SV as ServicoVotacao
+    participant V as view_perguntas
+    participant B as SQLite
+
+    F->>E: GET /perguntas?busca=python&id_usuario=1
+    E->>E: middlewares json e CORS
+    E->>C: listar(req, res)
+    C->>SP: buscar("texto", "python")
+    SP->>SP: remove espaços, termo não vazio
+    SP->>BT: condicao("python")
+    BT-->>SP: {sql: "lower(p.texto) like lower(?)", params: ["%python%"]}
+    SP->>RP: buscar(condicao)
+    RP->>B: select ... where lower(p.texto) like lower(?)
+    B-->>RP: linhas
+    RP-->>SP: perguntas com num_respostas
+    SP-->>C: perguntas
+    C->>SV: ordenar_por_placar(perguntas, 1)
+    SV-->>C: perguntas com placar e voto_usuario, ordenadas
+    C->>V: lista(perguntas)
+    V-->>C: JSON no formato da API
+    C-->>E: res.json(...)
+    E-->>F: 200 [{id_pergunta, texto, num_respostas, placar, voto_usuario}]

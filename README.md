@@ -17,6 +17,15 @@ Parte 2:
 - [CASO_DE_USO.md](CASO_DE_USO.md): caso de uso "Votar em Pergunta"
 - [DIAGRAMAS_UML.md](DIAGRAMAS_UML.md): diagramas de classes, sequência, atividades e estados (fontes e imagens em `diagramas/`)
 
+Parte 3:
+
+- [ANALISE_SOLID.md](ANALISE_SOLID.md): princípios SOLID seguidos e violados no código original
+- [IMPLEMENTACAO_SOLID.md](IMPLEMENTACAO_SOLID.md): votação implementada com SRP, DIP e OCP (código em `votacao/`)
+- [PADROES_EXISTENTES.md](PADROES_EXISTENTES.md): padrões de projeto já presentes
+- [PADROES_PROPOSTOS.md](PADROES_PROPOSTOS.md): Strategy, Observer e Decorator aplicados às funcionalidades
+- [ARQUITETURA.md](ARQUITETURA.md): estilos, camadas e diagrama da arquitetura atual
+- [PROPOSTA_ARQUITETURA.md](PROPOSTA_ARQUITETURA.md): separação em camadas e MVC no backend
+
 O README original do projeto segue abaixo.
 
 O **ESM Forum** é um sistema minimalista de demonstração do livro [Engenharia de Software Moderna](https://engsoftmoderna.info). 

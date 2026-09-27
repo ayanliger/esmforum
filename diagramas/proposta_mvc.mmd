@@ -1,0 +1,59 @@
+classDiagram
+    direction LR
+    namespace Controllers {
+        class ControllerPerguntas {
+            -servico_perguntas
+            -servico_votacao
+            +listar(req, res)
+            +cadastrar(req, res)
+        }
+        class ControllerVotos {
+            -servico_votacao
+            +votar(req, res)
+        }
+    }
+    namespace Views {
+        class view_perguntas {
+            <<módulo>>
+            +lista(perguntas) JSON
+            +criada(id_pergunta) JSON
+        }
+        class view_votos {
+            <<módulo>>
+            +resultado(id_pergunta, resultado) JSON
+        }
+        class view_erros {
+            <<módulo>>
+            +erro(res, erro)
+        }
+    }
+    namespace Model {
+        class ServicoPerguntas {
+            +listar()
+            +buscar(tipo, termo)
+            +cadastrar(texto, id_usuario)
+        }
+        class ServicoVotacao {
+            +votar(id_pergunta, id_usuario, valor)
+            +ordenar_por_placar(perguntas, id_usuario)
+        }
+        class RepositorioPerguntas {
+            +listar()
+            +buscar(condicao)
+            +inserir(texto, id_usuario)
+        }
+        class RepositorioVotosSQLite {
+            +buscar_voto()
+            +inserir()
+            +placares()
+        }
+    }
+    ControllerPerguntas --> ServicoPerguntas
+    ControllerPerguntas --> ServicoVotacao
+    ControllerPerguntas ..> view_perguntas
+    ControllerPerguntas ..> view_erros
+    ControllerVotos --> ServicoVotacao
+    ControllerVotos ..> view_votos
+    ControllerVotos ..> view_erros
+    ServicoPerguntas --> RepositorioPerguntas
+    ServicoVotacao --> RepositorioVotosSQLite
