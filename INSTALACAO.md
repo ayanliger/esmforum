@@ -94,7 +94,7 @@ O primeiro comando devolve a lista de perguntas em JSON, e o terceiro devolve o 
 npm test
 ```
 
-Resultado obtido: 2 suítes e 3 testes passando. Os testes de `testes/modelo.test.js` usam o banco `bd/esmforum-teste.db` e apagam os dados dele a cada execução, portanto o arquivo aparece como modificado no `git status` depois de rodar os testes. Para descartar essa alteração, usa-se `git checkout bd/esmforum-teste.db`.
+Resultado obtido na configuração do ambiente: 2 suítes e 3 testes passando. Com a votação implementada na Parte 3, são 4 suítes e 18 testes. Os testes de `testes/modelo.test.js` usam o banco `bd/esmforum-teste.db` e apagam os dados dele a cada execução, portanto o arquivo aparece como modificado no `git status` depois de rodar os testes. Para descartar essa alteração, usa-se `git checkout bd/esmforum-teste.db`.
 
 ### 3.5 Recriar o banco
 

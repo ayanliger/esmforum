@@ -15,9 +15,9 @@ sequenceDiagram
     C->>SP: buscar("texto", "python")
     SP->>SP: remove espaços, termo não vazio
     SP->>BT: condicao("python")
-    BT-->>SP: {sql: "lower(p.texto) like lower(?)", params: ["%python%"]}
+    BT-->>SP: {sql: "p.texto like ?", params: ["%python%"]}
     SP->>RP: buscar(condicao)
-    RP->>B: select ... where lower(p.texto) like lower(?)
+    RP->>B: select ... where p.texto like ?
     B-->>RP: linhas
     RP-->>SP: perguntas com num_respostas
     SP-->>C: perguntas

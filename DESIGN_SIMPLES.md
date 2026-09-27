@@ -1,6 +1,6 @@
 # Design Simples (YAGNI) no backend do ESM Forum
 
-O enunciado cita `routes/perguntas.js` e `routes/respostas.js`, mas a versão atual do repositório não tem pasta `routes/`. As rotas de perguntas e de respostas ficam todas em `server.js`, e as funções que elas chamam ficam em `modelo.js`, com o acesso ao SQLite isolado em `bd/bd_utils.js`. A análise abaixo usa esses três arquivos, que somam cerca de 130 linhas.
+O enunciado cita `routes/perguntas.js` e `routes/respostas.js`, mas a versão atual do repositório não tem pasta `routes/`. As rotas de perguntas e de respostas ficam todas em `server.js`, e as funções que elas chamam ficam em `modelo.js`, com o acesso ao SQLite isolado em `bd/bd_utils.js`. A análise abaixo usa esses três arquivos, que somam cerca de 130 linhas, na versão original: foi feita na Parte 1, antes da implementação da votação.
 
 O princípio YAGNI (You Aren't Gonna Need It) diz que não se implementa algo antes de haver uma necessidade concreta para ele. O ESM Forum hoje atende a quatro necessidades: listar perguntas, cadastrar pergunta, ver as respostas de uma pergunta e cadastrar resposta. A pergunta que orienta a análise é se cada trecho do código serve a uma dessas quatro operações.
 

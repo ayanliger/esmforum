@@ -38,8 +38,9 @@ Um critério novo, como busca por autor, é uma classe nova registrada no mapa e
 // busca/estrategias_busca.js
 class BuscaPorTexto {
   condicao(termo) {
-    // lower() nos dois lados: o LIKE do SQLite só ignora maiúsculas em ASCII
-    return { sql: 'lower(p.texto) like lower(?)', params: ['%' + termo + '%'] };
+    // O LIKE do SQLite já ignora maiúsculas em letras sem acento ("Python" e "python").
+    // Letras acentuadas ("É" e "é") exigiriam a extensão ICU ou normalizar o texto em JavaScript.
+    return { sql: 'p.texto like ?', params: ['%' + termo + '%'] };
   }
 }
 

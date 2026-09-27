@@ -213,7 +213,7 @@ Fonte: [proposta_fluxo_mvc.mmd](diagramas/proposta_fluxo_mvc.mmd)
 1. O usuário digita "python" no campo de busca, e o frontend envia `GET /perguntas?busca=python&id_usuario=1`.
 2. O Express aplica os middlewares (`express.json` e CORS) e entrega a requisição a `ControllerPerguntas.listar`.
 3. O controller identifica o tipo de busca (texto, porque não veio `tag`) e chama `ServicoPerguntas.buscar("texto", "python")`.
-4. O serviço remove os espaços, verifica que o termo não é vazio e pede à estratégia `BuscaPorTexto` a condição, que é `lower(p.texto) like lower(?)` com o parâmetro `%python%`.
+4. O serviço remove os espaços, verifica que o termo não é vazio e pede à estratégia `BuscaPorTexto` a condição, que é `p.texto like ?` com o parâmetro `%python%`.
 5. O serviço passa a condição a `RepositorioPerguntas.buscar`, que executa no SQLite a consulta com a contagem de respostas e devolve as perguntas encontradas.
 6. O controller passa as perguntas a `ServicoVotacao.ordenar_por_placar`, que acrescenta `placar` e `voto_usuario` e as ordena.
 7. O controller entrega a lista a `view_perguntas.lista`, que monta o JSON com os campos definidos.

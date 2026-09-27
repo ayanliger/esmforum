@@ -60,4 +60,4 @@ O perfil de usuário e a notificação ficam por último porque dependem de algo
 
 ## 4. Uso do quadro ao longo do projeto
 
-As tarefas da disciplina (documentos das partes 1, 2 e 3) também entram no quadro como cards, com a mesma política de colunas, para que o limite de WIP valha para todo o trabalho e não só para o código. O backlog é reordenado sempre que uma nova parte do projeto é liberada, e cada card concluído referencia o commit correspondente.
+As tarefas da disciplina (documentos das partes 1, 2 e 3) também entram no quadro como cards, com a mesma política de colunas, para que o limite de WIP valha para todo o trabalho e não só para o código. O backlog é reordenado sempre que uma nova parte do projeto é liberada, e a issue de cada funcionalidade concluída recebe um comentário com os commits que a implementaram.
