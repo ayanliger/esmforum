@@ -1,5 +1,18 @@
 const express = require('express')
 const modelo = require('./modelo.js');
+const bd = require('./bd/bd_utils.js');
+const RepositorioVotosSQLite = require('./votacao/repositorio_votos.js');
+const ServicoVotacao = require('./votacao/servico_votacao.js');
+const regras = require('./votacao/regras_voto.js');
+const criar_rotas_votacao = require('./votacao/rotas_votacao.js');
+
+// Único ponto em que se escolhem as implementações concretas da votação.
+const repositorio_votos = new RepositorioVotosSQLite(bd);
+const servico_votacao = new ServicoVotacao(repositorio_votos, [
+  new regras.RegraUsuarioInformado(),
+  new regras.RegraValorValido(),
+  new regras.RegraPerguntaExistente(repositorio_votos)
+]);
 
 const app = express()
 app.use(express.json());
@@ -14,7 +27,8 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   try {
     const perguntas = modelo.listar_perguntas();
-    res.send(perguntas);
+    const id_usuario = Number(req.query.id_usuario) || null;
+    res.send(servico_votacao.ordenar_por_placar(perguntas, id_usuario));
   }
   catch(erro) {
     res.status(500).json(erro.message); 
@@ -57,6 +71,8 @@ app.post('/respostas', (req, res) => {
     res.status(500).json(erro.message); 
   } 
 });
+
+app.use(criar_rotas_votacao(servico_votacao));
 
 // espera e trata requisições de clientes
 const port = 5000;
