@@ -1,0 +1,29 @@
+flowchart TD
+    inicio(( )) --> digitar[Usuário digita um termo no campo de busca e envia]
+    digitar --> aparar[Frontend remove espaços do início e do fim do termo]
+    aparar --> vazio{Termo vazio?}
+
+    vazio -- sim --> completa[Frontend requisita GET /]
+    completa --> exibirTudo[Frontend exibe a lista completa de perguntas]
+    exibirTudo --> fim
+
+    vazio -- não --> fork1[ ]
+    fork1 --> carregando[Frontend exibe o indicador Buscando...]
+    fork1 --> requisitar[Frontend requisita GET /perguntas?busca=termo]
+    requisitar --> consultar[Backend consulta perguntas cujo texto contém o termo, sem diferenciar maiúsculas]
+    consultar --> complementar[Backend acrescenta número de respostas e placar a cada pergunta]
+    complementar --> responder[Backend responde com a lista em JSON]
+    carregando --> join1[ ]
+    responder --> join1
+
+    join1 --> ocultar[Frontend remove o indicador Buscando...]
+    ocultar --> achou{Lista vazia?}
+    achou -- não --> exibir[Frontend exibe a tabela só com as perguntas encontradas]
+    achou -- sim --> mensagem[Frontend exibe Nenhuma pergunta encontrada para o termo]
+    exibir --> fim
+    mensagem --> fim(((" ")))
+
+    classDef barra fill:#000,stroke:#000,color:#000
+    class fork1,join1 barra
+    style inicio fill:#000,stroke:#000
+    style fim fill:#000,stroke:#000

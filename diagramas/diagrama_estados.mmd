@@ -1,0 +1,19 @@
+stateDiagram-v2
+    direction LR
+
+    [*] --> SemVoto : pergunta cadastrada
+
+    SemVoto --> Positivo : votar(+1) / insere voto, placar + 1
+    SemVoto --> Negativo : votar(-1) / insere voto, placar - 1
+
+    Positivo --> SemVoto : votar(+1) / remove voto, placar - 1
+    Positivo --> Negativo : votar(-1) / altera voto, placar - 2
+
+    Negativo --> SemVoto : votar(-1) / remove voto, placar + 1
+    Negativo --> Positivo : votar(+1) / altera voto, placar + 2
+
+    note right of SemVoto
+        Estado do par (usuário, pergunta).
+        SemVoto = nenhuma linha em votos.
+        Positivo e Negativo = uma linha com valor 1 ou -1.
+    end note

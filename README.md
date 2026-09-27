@@ -11,6 +11,12 @@ Parte 1:
 - [DESIGN_SIMPLES.md](DESIGN_SIMPLES.md): análise YAGNI de `server.js` e `modelo.js`
 - [PAIR_PROGRAMMING.md](PAIR_PROGRAMMING.md): planejamento da programação em pares
 
+Parte 2:
+
+- [HISTORIAS.md](HISTORIAS.md): histórias de votação, busca e tags, com critérios de aceitação e priorização
+- [CASO_DE_USO.md](CASO_DE_USO.md): caso de uso "Votar em Pergunta"
+- [DIAGRAMAS_UML.md](DIAGRAMAS_UML.md): diagramas de classes, sequência, atividades e estados (fontes e imagens em `diagramas/`)
+
 O README original do projeto segue abaixo.
 
 O **ESM Forum** é um sistema minimalista de demonstração do livro [Engenharia de Software Moderna](https://engsoftmoderna.info). 
