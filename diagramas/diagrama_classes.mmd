@@ -1,0 +1,43 @@
+classDiagram
+    direction LR
+
+    class Usuario {
+        +int id_usuario
+        +String nome
+    }
+
+    class Pergunta {
+        +int id_pergunta
+        +String texto
+        +int id_usuario
+        +placar() int
+        +num_respostas() int
+    }
+
+    class Resposta {
+        +int id_resposta
+        +int id_pergunta
+        +String texto
+        +int id_usuario
+    }
+
+    class Voto {
+        <<nova>>
+        +int id_voto
+        +int id_pergunta
+        +int id_usuario
+        +int valor
+    }
+
+    class Tag {
+        <<nova>>
+        +int id_tag
+        +String nome
+    }
+
+    Usuario "1" --> "0..*" Pergunta : publica
+    Usuario "1" --> "0..*" Resposta : publica
+    Pergunta "1" *-- "0..*" Resposta : recebe
+    Usuario "1" --> "0..*" Voto : registra
+    Pergunta "1" *-- "0..*" Voto : recebe
+    Pergunta "0..*" --> "1..3" Tag : classificada por

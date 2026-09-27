@@ -1,0 +1,58 @@
+sequenceDiagram
+    actor U as :Usuario
+    participant F as :Frontend
+    participant A as :API
+    participant S as :ServicoVotacao
+    participant R as :RepositorioVotos
+    participant B as :Banco
+
+    U->>F: clica em voto positivo (+1)
+    activate F
+    F->>A: POST /perguntas/7/votos {id_usuario: 1, valor: 1}
+    activate A
+    A->>S: votar(7, 1, 1)
+    activate S
+
+    alt valor diferente de 1 e -1
+        S-->>A: erro "Valor de voto inválido"
+        A-->>F: 400 {erro}
+    else pergunta inexistente
+        S->>R: pergunta_existe(7)
+        R->>B: select id_pergunta from perguntas
+        B-->>R: nenhuma linha
+        R-->>S: false
+        S-->>A: erro "Pergunta não encontrada"
+        A-->>F: 404 {erro}
+    else voto aceito
+        S->>R: pergunta_existe(7)
+        R->>B: select id_pergunta from perguntas
+        B-->>R: 1 linha
+        R-->>S: true
+        S->>R: buscar_voto(7, 1)
+        R->>B: select valor from votos
+        B-->>R: voto atual (ou nenhum)
+        R-->>S: voto_atual
+
+        alt usuário ainda não votou
+            S->>R: inserir(7, 1, 1)
+            R->>B: insert into votos
+        else voto igual ao atual
+            S->>R: remover(7, 1)
+            R->>B: delete from votos
+        else voto oposto ao atual
+            S->>R: atualizar(7, 1, 1)
+            R->>B: update votos set valor
+        end
+
+        S->>R: placar(7)
+        R->>B: select sum(valor) from votos
+        B-->>R: placar
+        R-->>S: placar
+        S-->>A: {placar, voto_usuario}
+        A-->>F: 200 {id_pergunta, placar, voto_usuario}
+    end
+
+    deactivate S
+    deactivate A
+    F-->>U: atualiza placar e destaque do botão
+    deactivate F
