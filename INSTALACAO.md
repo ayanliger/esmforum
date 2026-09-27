@@ -4,8 +4,8 @@ Este documento registra como o ambiente de desenvolvimento foi configurado para 
 
 Repositórios usados:
 
-- backend (fork de `jeffsantos/esmforum`): LINK_FORK_BACKEND
-- frontend (fork de `jeffsantos/esmforum-react`): LINK_FORK_FRONTEND
+- backend (fork de `jeffsantos/esmforum`): https://github.com/ayanliger/esmforum
+- frontend (fork de `jeffsantos/esmforum-react`): https://github.com/ayanliger/esmforum-react
 
 ## 1. Ambiente
 

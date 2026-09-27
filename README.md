@@ -2,7 +2,7 @@
 
 ## Projeto Final ES1 (FGV)
 
-Este fork contém o backend e os documentos do projeto final da disciplina Engenharia de Software 1. O frontend está no fork LINK_FORK_FRONTEND, e o quadro Kanban em LINK_DO_QUADRO.
+Este fork contém o backend e os documentos do projeto final da disciplina Engenharia de Software 1. O frontend está no fork https://github.com/ayanliger/esmforum-react, e o quadro Kanban em https://github.com/users/ayanliger/projects/3.
 
 Parte 1:
 

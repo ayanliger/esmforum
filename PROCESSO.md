@@ -1,6 +1,6 @@
 # Processo de desenvolvimento: Kanban
 
-Quadro no GitHub Projects: LINK_DO_QUADRO
+Quadro no GitHub Projects: https://github.com/users/ayanliger/projects/3
 
 ## 1. Processo escolhido
 
@@ -40,7 +40,7 @@ A lista de verificação da coluna Revisão, usada no lugar da revisão feita po
 
 ## 3. Cards e priorização
 
-O quadro começa com cinco cards, um por funcionalidade pedida pelo cliente, ordenados na coluna Backlog do mais prioritário para o menos prioritário. A prioridade combina três critérios: valor para quem usa o fórum, esforço estimado e dependência de outras funcionalidades.
+O quadro começa com cinco cards, um por funcionalidade pedida pelo cliente, ordenados na coluna Backlog do mais prioritário para o menos prioritário. Cada card é uma issue do fork do backend (#1 a #5), e o quadro tem um campo numérico Prioridade preenchido de 1 a 5, além da ordem na coluna. A prioridade combina três critérios: valor para quem usa o fórum, esforço estimado e dependência de outras funcionalidades.
 
 | Prioridade | Card | Valor | Esforço | Depende de |
 |------------|------|-------|---------|------------|
