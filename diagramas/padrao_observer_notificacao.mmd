@@ -1,0 +1,34 @@
+classDiagram
+    direction LR
+    class PublicadorEventos {
+        -observadores
+        +assinar(observador)
+        +publicar(evento)
+    }
+    class ObservadorResposta {
+        <<contrato>>
+        +resposta_cadastrada(evento)
+    }
+    class ServicoRespostas {
+        -repositorio
+        -publicador
+        +cadastrar(id_pergunta, texto, id_usuario) int
+    }
+    class NotificacaoNoSite {
+        -repositorio_notificacoes
+        +resposta_cadastrada(evento)
+    }
+    class NotificacaoPorEmail {
+        -enviador
+        +resposta_cadastrada(evento)
+    }
+    class RepositorioNotificacoes {
+        +inserir(id_usuario, id_pergunta, id_resposta)
+        +nao_lidas(id_usuario)
+        +marcar_lida(id_notificacao)
+    }
+    ServicoRespostas --> PublicadorEventos : publica
+    PublicadorEventos o--> "0..*" ObservadorResposta : notifica
+    ObservadorResposta <|.. NotificacaoNoSite
+    ObservadorResposta <|.. NotificacaoPorEmail
+    NotificacaoNoSite --> RepositorioNotificacoes

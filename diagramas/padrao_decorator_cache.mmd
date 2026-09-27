@@ -1,0 +1,32 @@
+classDiagram
+    direction LR
+    class RepositorioVotos {
+        <<contrato>>
+        +buscar_voto(id_pergunta, id_usuario)
+        +inserir(id_pergunta, id_usuario, valor)
+        +atualizar(id_pergunta, id_usuario, valor)
+        +remover(id_pergunta, id_usuario)
+        +placar(id_pergunta)
+        +placares()
+    }
+    class RepositorioVotosSQLite {
+        -bd
+    }
+    class RepositorioVotosComCache {
+        -repositorio
+        -cache_placares
+        +inserir(id_pergunta, id_usuario, valor)
+        +atualizar(id_pergunta, id_usuario, valor)
+        +remover(id_pergunta, id_usuario)
+        +placares()
+    }
+    class ServicoVotacao {
+        -repositorio
+    }
+    RepositorioVotos <|.. RepositorioVotosSQLite
+    RepositorioVotos <|.. RepositorioVotosComCache
+    RepositorioVotosComCache o--> "1" RepositorioVotos : decora
+    ServicoVotacao --> RepositorioVotos
+    note for RepositorioVotosComCache "inserir, atualizar e remover delegam e limpam o cache
+placares() consulta o decorado só se o cache estiver vazio
+demais métodos só delegam"

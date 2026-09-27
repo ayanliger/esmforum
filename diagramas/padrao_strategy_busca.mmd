@@ -1,0 +1,36 @@
+classDiagram
+    direction LR
+    class rotas_busca {
+        <<módulo>>
+        +GET /perguntas?busca=termo
+        +GET /perguntas?tag=nome
+    }
+    class ServicoBusca {
+        -repositorio
+        -estrategias
+        +buscar(tipo, termo) Pergunta[]
+    }
+    class EstrategiaBusca {
+        <<contrato>>
+        +condicao(termo) Condicao
+    }
+    class BuscaPorTexto {
+        +condicao(termo) Condicao
+    }
+    class BuscaPorTag {
+        +condicao(termo) Condicao
+    }
+    class RepositorioPerguntas {
+        +buscar(condicao) Pergunta[]
+    }
+    class Condicao {
+        +String sql
+        +Array params
+    }
+    rotas_busca --> ServicoBusca
+    ServicoBusca --> "1..*" EstrategiaBusca
+    ServicoBusca --> RepositorioPerguntas
+    EstrategiaBusca <|.. BuscaPorTexto
+    EstrategiaBusca <|.. BuscaPorTag
+    EstrategiaBusca ..> Condicao : cria
+    RepositorioPerguntas ..> Condicao : usa
