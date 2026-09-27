@@ -1,0 +1,41 @@
+flowchart LR
+    usuario([Usuário])
+
+    subgraph navegador["Navegador: frontend React (porta 3000)"]
+        direction TB
+        menu["Menu.js<br/>navegação"]
+        pagPergunta["Pergunta.js<br/>lista, cadastro e votos"]
+        pagResposta["Resposta.js<br/>respostas de uma pergunta"]
+    end
+
+    subgraph servidor["Servidor Node.js + Express (porta 5000)"]
+        direction TB
+        subgraph controle["Controle (apresentação da API)"]
+            server["server.js<br/>middlewares json e CORS<br/>GET /, POST /perguntas<br/>GET /respostas/:id, POST /respostas"]
+            rotasVot["votacao/rotas_votacao.js<br/>POST /perguntas/:id/votos"]
+        end
+        subgraph negocio["Negócio"]
+            modelo["modelo.js<br/>perguntas e respostas"]
+            servico["votacao/servico_votacao.js<br/>regras_voto.js"]
+        end
+        subgraph dados["Dados"]
+            repo["votacao/repositorio_votos.js"]
+            bdutils["bd/bd_utils.js<br/>query, queryAll, exec"]
+        end
+    end
+
+    banco[("SQLite<br/>bd/esmforum.db<br/>perguntas, respostas, votos")]
+
+    usuario --> menu
+    menu --> pagPergunta
+    menu --> pagResposta
+    pagPergunta -- "HTTP + JSON (fetch)" --> server
+    pagPergunta -- "HTTP + JSON (fetch)" --> rotasVot
+    pagResposta -- "HTTP + JSON (fetch)" --> server
+    server --> modelo
+    server --> servico
+    rotasVot --> servico
+    modelo -- "SQL" --> bdutils
+    servico --> repo
+    repo -- "SQL" --> bdutils
+    bdutils -- "better-sqlite3" --> banco
