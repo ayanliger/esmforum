@@ -1,5 +1,18 @@
 # ESM Forum
 
+## Projeto Final ES1 (FGV)
+
+Este fork contém o backend e os documentos do projeto final da disciplina Engenharia de Software 1. O frontend está no fork LINK_FORK_FRONTEND, e o quadro Kanban em LINK_DO_QUADRO.
+
+Parte 1:
+
+- [INSTALACAO.md](INSTALACAO.md): configuração do ambiente e ajustes para Node 26
+- [PROCESSO.md](PROCESSO.md): escolha do Kanban, colunas do quadro e priorização
+- [DESIGN_SIMPLES.md](DESIGN_SIMPLES.md): análise YAGNI de `server.js` e `modelo.js`
+- [PAIR_PROGRAMMING.md](PAIR_PROGRAMMING.md): planejamento da programação em pares
+
+O README original do projeto segue abaixo.
+
 O **ESM Forum** é um sistema minimalista de demonstração do livro [Engenharia de Software Moderna](https://engsoftmoderna.info). 
 Ele é um fórum simples de perguntas e respostas. O objetivo é permitir que os alunos tenham um primeiro contato prático com os conceitos estudados no livro. Ou seja:
 
